@@ -76,6 +76,7 @@ $("#task-form-modal .btn-primary").click(function () {
   }
 });
 
+// tasks sortable
 $(".card .list-group").sortable({
   connectWith: $(".card .list-group"),
   scroll: false,
@@ -102,6 +103,7 @@ $(".card .list-group").sortable({
     saveTasks();
   },
 });
+
 // task text was clicked
 $(".list-group").on("click", "p", function () {
   // get current text of p element
@@ -168,6 +170,21 @@ $(".list-group").on("blur", "input[type='text']", function () {
     .addClass("badge badge-primary badge-pill")
     .text(date);
   $(this).replaceWith(taskSpan);
+});
+
+// drag and drop to trash
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function (event, ui) {
+    ui.draggable.remove();
+  },
+  over: function (event, ui) {
+    console.log("over");
+  },
+  out: function (event, ui) {
+    console.log("out");
+  },
 });
 
 // remove all tasks
